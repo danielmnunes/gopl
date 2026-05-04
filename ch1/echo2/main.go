@@ -2,14 +2,19 @@ package main
 
 import (
 	"fmt"
+	"io"
 	"os"
 )
 
-func main() {
+func echo(args []string, w io.Writer) {
 	s, sep := "", ""
-	for _, arg := range os.Args[1:] {
+	for _, arg := range args {
 		s += sep + arg
 		sep = "_"
 	}
-	fmt.Println(s)
+	fmt.Fprintln(w, s)
+}
+
+func main() {
+	echo(os.Args[1:], os.Stdout)
 }

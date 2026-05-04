@@ -3,11 +3,16 @@ package main
 
 import (
 	"fmt"
+	"io"
 	"os"
 )
 
-func main() {
-	for i := 0; i < len(os.Args); i++ {
-		fmt.Println(os.Args[i])
+func echo(args []string, w io.Writer) {
+	for i := 1; i < len(args); i++ {
+		fmt.Fprintln(w, args[i])
 	}
+}
+
+func main() {
+	echo(os.Args, os.Stdout)
 }

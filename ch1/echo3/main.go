@@ -2,11 +2,15 @@ package main
 
 import (
 	"fmt"
+	"io"
 	"os"
 	"strings"
 )
 
+func echo(args []string, w io.Writer) {
+	fmt.Fprintln(w, strings.Join(args, " "))
+}
+
 func main() {
-	fmt.Println(strings.Join(os.Args[1:], " "))
-	fmt.Println(os.Args[1:])
+	echo(os.Args[1:], os.Stdout)
 }
